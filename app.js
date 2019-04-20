@@ -90,5 +90,7 @@ passportSetup(app)
 // ROUTES MIDDLEWARE STARTS HERE
 app.use('/api', require('./routes/index'));
 app.use('/api', require('./routes/auth-routes'));
-app.use('/api', require('./routes/tree-routes'))
+app.use('/api', require('./routes/tree-routes'));
+app.use('/api', require('./routes/tree-record-routes'));
+app.use('/api', require('./routes/illness-routes'));
 module.exports = app;

@@ -3,7 +3,11 @@ const Schema   = mongoose.Schema;
 
 
 const userSchema = new Schema({
-        email: {type: String, require: true},
+        email: {
+            type: String, 
+            require: true,
+            match: /^.+@.+\..+$/
+        },
         username : {type: String, require:true},
         password : {type: String, require:true},
         resetPasswordToken:{type:String},

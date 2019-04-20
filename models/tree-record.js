@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema    = mongoose.Schema;
 
 const treeRecordSchema = new Schema({
-  tree: { type: Schema.Types.ObjectId, ref :'Tree'},
+  treeId: { type: Schema.Types.ObjectId, ref :'Tree'},
   irrigation : { type : String, enum:[]  }, 
   irrigationdescription : { type: String},
   soilhelth : { type: String},

@@ -2,7 +2,9 @@ const mongoose = require('mongoose')
 const Schema   = mongoose.Schema;
 
 const treeSchema = new Schema ({
-  position: {type: Number},
+  position: {type: String},
+  latitud:{type:Number, required:true},
+  altitud:{type:Number,require:true},
   name: {type: String},
   description:{type: String}
   },

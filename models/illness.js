@@ -2,11 +2,11 @@ const mongoose  = require('mongoose');
 const Schema    = mongoose.Schema;
 
 const illnessSchema = new Schema({
-    name       : {Type: String},
-    lookslike  : {Type:String},
-    control    : {Type:String},
-    observation : {Type:String}
+    name       : {type: String},
+    lookslike  : {type:String},
+    control    : {type:String},
+    observation : {type:String}
 })
 
-const Illness  = mongoose.model('illness', illnessSchema);
+const Illness  = mongoose.model('Illness', illnessSchema);
 module.exports = Illness;

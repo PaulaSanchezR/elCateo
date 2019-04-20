@@ -22,7 +22,7 @@ authRoutes.post("/signup", (req, res, next) => {
     const email = req.body.email;
     const name = req.body.name;
     const lastName = req.body.lastName;
-    console.log(username,password,email,name,lastName)  
+    //console.log(username,password,email,name,lastName)  
 //|| email ==="" || name ==="" || lastName === ""
  // ************* validations  ******************
     if (username === "" || password === "" ) {
@@ -49,7 +49,7 @@ authRoutes.post("/signup", (req, res, next) => {
       }
          const salt = bcrypt.genSaltSync(bcryptSalt);
          const hashPass = bcrypt.hashSync(password, salt);
-         //console.log(username,password,email,name,lastName) 
+         console.log(username,password,email,name,lastName) 
           const newUser = new User({
             username,
             password: hashPass,
@@ -58,6 +58,7 @@ authRoutes.post("/signup", (req, res, next) => {
             lastName,
             privi:false
           });
+          console.log("====", newUser.name)
           newUser.save(err => {
             if(err){
               res
@@ -154,6 +155,7 @@ authRoutes.post('/logout', (req, res, next) => {
 // what are the details of the logged-in user
 
 authRoutes.get("/checkuser" , (req,res,next) => {
+  console.log("user info",req.user)
   // req.user is a method that we can use
   if(req.user) {
     // hide "encryptedPassword" before sending the JSON (it is a securty risk)
