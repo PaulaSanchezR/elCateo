@@ -1,47 +1,63 @@
 const express = require('express');
 const treeRecordRouter = express.Router();
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const TreeTask = require('../models/tasktree');
 const Tree     = require ('../models/tree');
-const TreeRecord = require('../models/tree-record')
+const TreeRecord = require('../models/tree-record');
+const Illness = require('../models/illness');
 
 
-//============= New Record
+//============= New Tree Record
 
 treeRecordRouter.post('/treerecord/:idtree', (req,res,next) =>{
-  console.log('id', req.params.idtree);
+   console.log('id', req.params.idtree);
   // valid if the id is valid for mongoose
   if (!mongoose.Types.ObjectId.isValid(req.params.idtree)) {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
   }
-  TreeRecord.find({treeId:req.param.idtree})
-  .populate('tree')
-  .then(record =>{
-      treeRecordRouter.create({
+
+const { irrigation, 
+         irrigationdescription, 
+         soilhelth,
+         soildescription, 
+         salt,
+         saltdescription,
+         illness,
+         illnessdescription
+      } = req.body;
+  
+  TreeRecord.create({
         treeId: req.param.idtree,
-        irrigation: req.body.irrigation, 
-        irrigationdescription: req.body.irrigationdescription ,
-        soilhelth: req.body.soilhelth ,
-        soildescription: req.body.soildescription,
-        salt: req.body.salt,
-        saltdescription: req.body.saltdescription,
-        illness: req.body.illness ,
-        illnessdescription: req.body.illnessdescription
+        irrigation, irrigationdescription , soilhelth,    soildescription,
+        salt, saltdescription, illness ,  illnessdescription
      })
      .then(newTreeRecord =>{
-          res.status(200).json(newTreeRecord)
+           res.status(200).json(newTreeRecord)
      } )
-     .cath(err => {
+     .catch(err => {
        res.json(err)
      })
-   
-    
-  })
-  .catch(err =>{
-    res.json(err);
-  })
+ })
+
+// ==== List Records for an specific tree
+treeRecordRouter.get('/treerecord/:id', (res,req,next)=>{
+   if (!mongoose.Types.ObjectId.isValid(req.params.idtree)) {
+      res.status(400).json({ message: 'Specified id is not valid' });
+      return;
+    }
+
+    TreeRecord.findById(req.param.idtree)
+    .populate(Tree)
+    .populate(Illness)
+    .then()
+    .catch()
 })
 
+
 module.exports = treeRecordRouter;
+
+
+
+

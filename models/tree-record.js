@@ -3,7 +3,9 @@ const Schema    = mongoose.Schema;
 
 const treeRecordSchema = new Schema({
   treeId: { type: Schema.Types.ObjectId, ref :'Tree'},
-  irrigation : { type : String, enum:[]  }, 
+  irrigation : [
+                {type : String}
+               ],
   irrigationdescription : { type: String},
   soilhelth : { type: String},
   soildescription: { type: String},
@@ -16,5 +18,5 @@ const treeRecordSchema = new Schema({
   timestamps: true
 });
 
-const TreeRecord = mongoose.model('treerecord', treeRecordSchema);
+const TreeRecord = mongoose.model('Treerecord', treeRecordSchema);
 module.exports = TreeRecord;

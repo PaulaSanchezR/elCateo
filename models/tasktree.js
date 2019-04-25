@@ -12,6 +12,6 @@ const taskTreeSchema = new Schema({
         timestamps: {createdAt:"created_at",updateAt:"update_at"}
     });
 
-const TaskTree = mongoose.model("tasktree" , taskTreeSchema);
+const TaskTree = mongoose.model("Tasktree" , taskTreeSchema);
 
 module.exports = TaskTree;

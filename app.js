@@ -93,4 +93,5 @@ app.use('/api', require('./routes/auth-routes'));
 app.use('/api', require('./routes/tree-routes'));
 app.use('/api', require('./routes/tree-record-routes'));
 app.use('/api', require('./routes/illness-routes'));
+app.use('/api', require('./routes/group-routes'));
 module.exports = app;
