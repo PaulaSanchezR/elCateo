@@ -13,7 +13,7 @@ const Illness = require('../models/illness');
 treeRecordRouter.post('/treerecord/:idtree', (req,res,next) =>{
    console.log('id', req.params.idtree);
   // valid if the id is valid for mongoose
-  if (!mongoose.Types.ObjectId.isValid(req.params.idtree)) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.idtree) && req.params.idtree === "") {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
   }
@@ -27,9 +27,10 @@ const { irrigation,
          illness,
          illnessdescription
       } = req.body;
+
   
   TreeRecord.create({
-        treeId: req.param.idtree,
+        treeId: req.params.idtree,
         irrigation, irrigationdescription , soilhelth,    soildescription,
         salt, saltdescription, illness ,  illnessdescription
      })
@@ -42,17 +43,23 @@ const { irrigation,
  })
 
 // ==== List Records for an specific tree
-treeRecordRouter.get('/treerecord/:id', (res,req,next)=>{
-   if (!mongoose.Types.ObjectId.isValid(req.params.idtree)) {
+treeRecordRouter.get('/treerecord/:idtreeRecord', (req,res,next)=>{
+  console.log(req.params.idtreeRecord);
+  if (!mongoose.Types.ObjectId.isValid(req.params.idtreeRecord)) {
       res.status(400).json({ message: 'Specified id is not valid' });
       return;
     }
 
-    TreeRecord.findById(req.param.idtree)
-    .populate(Tree)
-    .populate(Illness)
-    .then()
-    .catch()
+    TreeRecord.find({'treeId':req.params.idtreeRecord})
+    .populate('treeId')
+    .populate('illness')
+    .then(treeRecord =>{
+      //console.log("record", treeRecord)
+        res.status(200).json(treeRecord);
+    })
+    .catch(err => {
+      res.status(500).json({ message:" Listing the Tree Record went wrong"});
+    })
 })
 
 
