@@ -78,7 +78,8 @@ app.use(passport.session());
 app.use(
   cors({
     credentials: true,
-    origin: ['https://elcateo.herokuapp.com'], // <== this will be the URL of our React app (it will be running on port 3000)
+    //https://elcateo.herokuapp.com
+    origin: ['http://localhost:3000'], // <== this will be the URL of our React app (it will be running on port 3000)
   })
 );
 

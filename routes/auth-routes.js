@@ -143,10 +143,12 @@ authRoutes.get("/private-page", ensureLogin.ensureLoggedIn(), (req, res) => {
 //   })
 // })  
 
-authRoutes.post('/logout', (req, res, next) => {
+authRoutes.delete('/logout', (req, res, next) => {
   // req.logout() is defined by passport
-  req.logout();
-  res.status(200).json({ message: 'Log out success!' });
+  req.logOut();
+  res.status(200).json({ 
+    message: 'Log out success!',
+    theUser: null });
 });
 
 
