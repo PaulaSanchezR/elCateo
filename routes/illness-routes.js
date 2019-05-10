@@ -27,7 +27,7 @@ if(name === '' || lookslike ==='' || control === ''){
   return;
 }
   console.log("name",name)
-  console.log("lookslike",lookslike)
+  // console.log("lookslike",lookslike)
   Illness.create({
     name, 
     lookslike,
@@ -35,7 +35,7 @@ if(name === '' || lookslike ==='' || control === ''){
     observation
   })
     .then(newIllness => {
-      console.log('=====',newIllness);
+      // console.log('=====',newIllness);
       res.json(newIllness);
     })
     .catch(err => {

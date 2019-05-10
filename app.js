@@ -94,4 +94,9 @@ app.use('/api', require('./routes/tree-routes'));
 app.use('/api', require('./routes/tree-record-routes'));
 app.use('/api', require('./routes/illness-routes'));
 app.use('/api', require('./routes/group-routes'));
+
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+})
 module.exports = app;

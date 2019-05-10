@@ -29,4 +29,17 @@ groupRouter.post('/group', (req,res,next) => {
    }) 
 });
 
+groupRouter.get('/allgroup',(req,res,next) =>{
+  Group.find()
+  .then(listGroup =>{
+     res.json(listGroup)
+  })
+  .catch(err => next(err) )
+})
+
+groupRouter.get('/treebygroup',(req,res,next) =>{
+  Group.find({ $treeI: { _id: null, count: { $sum: 1 } } })
+   
+})
+
 module.exports = groupRouter;

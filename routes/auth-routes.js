@@ -154,7 +154,7 @@ authRoutes.post('/logout', (req, res, next) => {
 // if we are logged-in
 // what are the details of the logged-in user
 
-authRoutes.get("/checkuser" , (req,res,next) => {
+authRoutes.get("/checkuser" , (req,res) => {
   console.log("user info",req.user)
   // req.user is a method that we can use
   if(req.user) {

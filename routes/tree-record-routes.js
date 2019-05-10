@@ -44,7 +44,7 @@ const { irrigation,
 
 // ==== List Records for an specific tree
 treeRecordRouter.get('/treerecord/:idtreeRecord', (req,res,next)=>{
-  console.log(req.params.idtreeRecord);
+  // console.log(req.params.idtreeRecord);
   if (!mongoose.Types.ObjectId.isValid(req.params.idtreeRecord)) {
       res.status(400).json({ message: 'Specified id is not valid' });
       return;
@@ -53,8 +53,10 @@ treeRecordRouter.get('/treerecord/:idtreeRecord', (req,res,next)=>{
     TreeRecord.find({'treeId':req.params.idtreeRecord})
     .populate('treeId')
     .populate('illness')
+    
+    
     .then(treeRecord =>{
-      //console.log("record", treeRecord)
+      // console.log("record", treeRecord)
         res.status(200).json(treeRecord);
     })
     .catch(err => {
