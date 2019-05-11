@@ -43,7 +43,25 @@ if(name === '' || lookslike ==='' || control === ''){
     })
 });
 
+//======UPDATE ILLNESS
 
+
+illnessRoute.put("/editillenss/:id", (req, res, next) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(400).json({ message: 'Specified id is not valid' });
+    return;
+  }
+  const { id } = req.params;
+  const { name , lookslike, control, observation } = req.body;
+  
+  // Phone.findByIdAndUpdate(id, req.body)
+  Phone.findByIdAndUpdate(
+    id,
+    { $set:{ name , lookslike, control, observation } }
+  )
+  .then(illnessDoc => res.json(illnessDoc))
+  .catch(err => next(err));
+});
 
 
 //====== DELETE ILLNESS
