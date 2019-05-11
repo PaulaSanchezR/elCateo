@@ -145,10 +145,9 @@ authRoutes.get("/private-page", ensureLogin.ensureLoggedIn(), (req, res) => {
 
 authRoutes.delete('/logout', (req, res, next) => {
   // req.logout() is defined by passport
+  console.log("entro");
   req.logOut();
-  res.status(200).json({ 
-    message: 'Log out success!',
-    theUser: null });
+  res.status(200).json({ theUser: null });
 });
 
 
